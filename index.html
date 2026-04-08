@@ -3468,14 +3468,15 @@
       <div class="grid contact-flex-grid">
         <div class="glass panel reveal contact-intro-card">
           <span class="mini-kicker">Let's connect</span>
-          <h3>Open my inbox or send a direct message</h3>
+          <h3>Direct web contact and professional links</h3>
           <p>
-            Use the quick links below, or send a message from the form on the right.
+            Visitors can send a message directly from the website, or use the quick links below.
           </p>
 
           <div class="project-links">
             <a href="mailto:mdborhanuddinshuvo7@gmail.com">Personal Email</a>
             <a href="mailto:mshuvo2420568@bscse.uiu.ac.bd">University Email</a>
+            <a href="https://formsubmit.co/el/secevi" target="_blank" rel="noopener noreferrer">Direct Email Link</a>
             <a href="https://bd.linkedin.com/in/md-borhan-uddin-shuvo-5663b7300" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://github.com/SHUVO-ROBO" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
@@ -3486,16 +3487,17 @@
           </div>
         </div>
 
-        <form class="glass contact-form-card reveal" id="portfolioContactForm" action="https://formsubmit.co/mdborhanuddinshuvo7@gmail.com" method="POST">
+        <form class="glass contact-form-card reveal" id="portfolioContactForm" action="https://formsubmit.co/bc3c1af618fb22e1e19da0f6f8484707" method="POST">
           <div>
             <span class="mini-kicker">Direct message</span>
             <h3>Send a message</h3>
-            <p class="contact-form-note">Fill in the details and send directly from the website to my primary inbox.</p>
+            <p class="contact-form-note">Fill in the form and send a direct message to my primary inbox from the website.</p>
           </div>
 
           <input type="hidden" name="_subject" id="contactFormSubjectLine" value="Portfolio message from website" />
           <input type="hidden" name="_next" id="contactFormNextUrl" value="" />
           <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="contact-honeypot" aria-hidden="true" />
 
           <div class="contact-form-grid">
@@ -3520,7 +3522,7 @@
             </div>
           </div>
 
-          <div class="contact-form-status" id="contactFormStatus">Ready to receive direct website messages.</div>
+          <div class="contact-form-status" id="contactFormStatus">Ready to receive direct website messages in my primary inbox.</div>
 
           <div class="contact-form-actions">
             <button class="btn btn-primary" type="submit">Send Message</button>
@@ -4271,15 +4273,15 @@
         contactFormSubjectLine.value = `Portfolio message: ${subject}`;
       }
 
-      setContactStatus("Sending directly from the website...", "success");
+      setContactStatus("Sending the message from the website...", "success");
     });
 
     portfolioContactForm?.addEventListener("reset", () => {
-      setTimeout(() => setContactStatus("Ready to receive direct website messages."), 0);
+      setTimeout(() => setContactStatus("Ready to receive direct website messages in my primary inbox."), 0);
     });
 
     if (new URLSearchParams(window.location.search).get("contact") === "success") {
-      setContactStatus("Message sent from the website. Please also check spam if it does not appear quickly.", "success");
+      setContactStatus("Message sent from the website to my primary inbox. Please also check spam if it does not appear quickly.", "success");
       const cleanUrl = new URL(window.location.href);
       cleanUrl.searchParams.delete("contact");
       window.history.replaceState({}, "", cleanUrl.toString());

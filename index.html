@@ -2311,6 +2311,30 @@
       gap: 18px;
     }
 
+    body:not(.project-owner-unlocked) .project-studio-panel {
+      display: none;
+    }
+
+    body.project-owner-unlocked .project-studio-panel {
+      display: grid;
+    }
+
+    .owner-studio-indicator {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(89,231,255,0.08);
+      border: 1px solid rgba(89,231,255,0.16);
+      color: #eafaff;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    body.project-owner-unlocked .owner-studio-indicator {
+      display: block;
+    }
+
     .project-studio-head {
       display: flex;
       justify-content: space-between;
@@ -2333,6 +2357,15 @@
     .contact-form-status {
       color: var(--muted);
       line-height: 1.85;
+    }
+
+    .contact-honeypot {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px !important;
+      height: 1px !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     .project-studio-actions {
@@ -3141,14 +3174,18 @@
         A flexible project showcase where I can add, edit, and refresh portfolio projects whenever I need.
       </p>
 
+      <div class="owner-studio-indicator reveal" id="ownerStudioIndicator">
+        Owner Studio unlocked. Editing controls are visible only in this browser session.
+      </div>
+
       <div class="glass panel reveal project-studio-panel">
         <div class="project-studio-head">
           <div>
             <span class="mini-kicker">Flexible portfolio control</span>
             <h3>Update projects directly from the portfolio</h3>
             <p>
-              This section is now ready for live project management. I can create new cards, edit details,
-              change links, update status, and remove old projects from one clean project studio.
+              Owner-only project management lives here. I can create new cards, edit details,
+              change links, update status, and remove old projects without exposing edit controls to visitors.
             </p>
           </div>
 
@@ -3449,12 +3486,17 @@
           </div>
         </div>
 
-        <form class="glass contact-form-card reveal" id="portfolioContactForm">
+        <form class="glass contact-form-card reveal" id="portfolioContactForm" action="https://formsubmit.co/mdborhanuddinshuvo7@gmail.com" method="POST">
           <div>
             <span class="mini-kicker">Direct message</span>
             <h3>Send a message</h3>
-            <p class="contact-form-note">Fill in the details and open a ready-to-send email draft.</p>
+            <p class="contact-form-note">Fill in the details and send directly from the website to my primary inbox.</p>
           </div>
+
+          <input type="hidden" name="_subject" id="contactFormSubjectLine" value="Portfolio message from website" />
+          <input type="hidden" name="_next" id="contactFormNextUrl" value="" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="contact-honeypot" aria-hidden="true" />
 
           <div class="contact-form-grid">
             <div class="contact-field">
@@ -3478,7 +3520,7 @@
             </div>
           </div>
 
-          <div class="contact-form-status" id="contactFormStatus">Ready.</div>
+          <div class="contact-form-status" id="contactFormStatus">Ready to receive direct website messages.</div>
 
           <div class="contact-form-actions">
             <button class="btn btn-primary" type="submit">Send Message</button>
@@ -3603,6 +3645,9 @@
 
     let portfolioProjects = loadPortfolioProjects();
     let studioMode = false;
+    const OWNER_STUDIO_STORAGE_KEY = "portfolio-owner-studio-unlocked";
+    const OWNER_STUDIO_PASSCODE = "SHUVO-ROBO-2025";
+    let ownerStudioUnlocked = false;
 
     const projectGrid = document.getElementById("projectGrid");
     const projectStudioNote = document.getElementById("projectStudioNote");
@@ -3614,6 +3659,7 @@
     const projectSearchInput = document.getElementById("projectSearchInput");
     const projectFilterPills = document.getElementById("projectFilterPills");
     const projectCountText = document.getElementById("projectCountText");
+    const ownerStudioIndicator = document.getElementById("ownerStudioIndicator");
 
     let projectSearchTerm = "";
     let projectStatusFilter = "all";
@@ -3729,15 +3775,70 @@
       return escapeHtml(value).replace(/`/g, "&#96;");
     }
 
-    function updateStudioUi() {
-      document.body.classList.toggle("studio-mode-on", studioMode);
-      if (toggleStudioModeBtn) {
-        toggleStudioModeBtn.textContent = `Studio Mode: ${studioMode ? "On" : "Off"}`;
+    function setOwnerStudioUnlocked(value) {
+      ownerStudioUnlocked = Boolean(value);
+      document.body.classList.toggle("project-owner-unlocked", ownerStudioUnlocked);
+
+      if (!ownerStudioUnlocked) {
+        studioMode = false;
+        document.body.classList.remove("studio-mode-on");
       }
+
+      if (ownerStudioIndicator) {
+        ownerStudioIndicator.textContent = ownerStudioUnlocked
+          ? "Owner Studio unlocked. Editing controls are visible only in this browser session."
+          : "";
+      }
+
+      updateStudioUi();
+    }
+
+    function unlockOwnerStudio() {
+      const entered = window.prompt("Enter owner passcode to unlock Project Studio:");
+      if (entered === null) return false;
+
+      if (entered.trim() !== OWNER_STUDIO_PASSCODE) {
+        window.alert("Wrong passcode.");
+        return false;
+      }
+
+      localStorage.setItem(OWNER_STUDIO_STORAGE_KEY, "true");
+      setOwnerStudioUnlocked(true);
+      studioMode = true;
+      updateStudioUi();
+
       if (projectStudioNote) {
-        projectStudioNote.textContent = studioMode
-          ? "Studio mode is active. You can now edit, delete, move, and add project cards."
-          : "Studio mode is off. Visitors only see the clean public project view.";
+        projectStudioNote.textContent = "Owner Studio unlocked. You can now add, edit, delete, and reorder project cards.";
+      }
+
+      return true;
+    }
+
+    function lockOwnerStudio() {
+      localStorage.removeItem(OWNER_STUDIO_STORAGE_KEY);
+      setOwnerStudioUnlocked(false);
+      closeProjectEditor();
+      if (typeof closeImportModal === "function") closeImportModal();
+    }
+
+    function ensureOwnerStudio() {
+      if (ownerStudioUnlocked) return true;
+      return unlockOwnerStudio();
+    }
+
+    function updateStudioUi() {
+      document.body.classList.toggle("studio-mode-on", ownerStudioUnlocked && studioMode);
+
+      if (toggleStudioModeBtn) {
+        toggleStudioModeBtn.textContent = `Studio Mode: ${ownerStudioUnlocked && studioMode ? "On" : "Off"}`;
+      }
+
+      if (projectStudioNote) {
+        projectStudioNote.textContent = ownerStudioUnlocked
+          ? (studioMode
+              ? "Studio mode is active. You can now edit, delete, move, and add project cards."
+              : "Studio mode is off. Visitors only see the clean public project view.")
+          : "Owner controls are hidden from visitors. Press Alt + Shift + S to unlock them on your device.";
       }
     }
 
@@ -3820,6 +3921,7 @@
     const projectEditorTitle = document.getElementById("projectEditorTitle");
 
     function openProjectEditor(projectId = null) {
+      if (!ensureOwnerStudio()) return;
       const project = portfolioProjects.find(item => item.id === projectId);
       projectEditIdInput.value = project?.id || "";
       projectTitleInput.value = project?.title || "";
@@ -3857,6 +3959,7 @@
 
     projectEditorForm?.addEventListener("submit", (event) => {
       event.preventDefault();
+      if (!ensureOwnerStudio()) return;
       const existingId = projectEditIdInput.value.trim();
       const preparedProject = {
         id: existingId || createProjectId(projectTitleInput.value.trim()),
@@ -3889,6 +3992,7 @@
 
     projectGrid?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-project-action]");
+      if (button && !ensureOwnerStudio()) return;
       if (!button) return;
       const action = button.getAttribute("data-project-action");
       const projectId = button.getAttribute("data-project-id");
@@ -3919,17 +4023,20 @@
     });
 
     addProjectBtn?.addEventListener("click", () => {
+      if (!ensureOwnerStudio()) return;
       studioMode = true;
       updateStudioUi();
       openProjectEditor();
     });
 
     toggleStudioModeBtn?.addEventListener("click", () => {
+      if (!ownerStudioUnlocked && !ensureOwnerStudio()) return;
       studioMode = !studioMode;
       updateStudioUi();
     });
 
     exportProjectsBtn?.addEventListener("click", async () => {
+      if (!ensureOwnerStudio()) return;
       const payload = JSON.stringify(portfolioProjects, null, 2);
       const blob = new Blob([payload], { type: "application/json" });
       const downloadUrl = URL.createObjectURL(blob);
@@ -3947,6 +4054,7 @@
       } catch (error) {
         if (projectStudioNote) projectStudioNote.textContent = "Project data exported as a JSON file.";
       }
+    });
 
     /* --- Project search + filter --- */
     projectSearchInput?.addEventListener("input", (event) => {
@@ -4049,6 +4157,7 @@
     }
 
     importProjectsBtn?.addEventListener("click", () => {
+      if (!ensureOwnerStudio()) return;
       studioMode = true;
       updateStudioUi();
       openImportModal();
@@ -4059,6 +4168,7 @@
     document.getElementById("projectImportBackdrop")?.addEventListener("click", closeImportModal);
 
     document.getElementById("projectImportApply")?.addEventListener("click", async () => {
+      if (!ensureOwnerStudio()) return;
       try {
         let raw = String(projectImportTextarea?.value || "").trim();
         if (!raw && projectImportFile?.files?.[0]) {
@@ -4094,9 +4204,8 @@
       }, 650);
     });
 
-    });
-
     resetProjectsBtn?.addEventListener("click", () => {
+      if (!ensureOwnerStudio()) return;
       const ok = window.confirm("Reset project cards back to the default portfolio version?");
       if (!ok) return;
       portfolioProjects = cloneProjectData(DEFAULT_PORTFOLIO_PROJECTS);
@@ -4105,11 +4214,27 @@
       if (projectStudioNote) projectStudioNote.textContent = "Project cards reset to the default portfolio version.";
     });
 
+    const ownerStudioStored = localStorage.getItem(OWNER_STUDIO_STORAGE_KEY) === "true";
+    setOwnerStudioUnlocked(ownerStudioStored);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.altKey && event.shiftKey && String(event.key).toLowerCase() === "s") {
+        event.preventDefault();
+        if (ownerStudioUnlocked) {
+          lockOwnerStudio();
+        } else {
+          unlockOwnerStudio();
+        }
+      }
+    });
+
     renderPortfolioProjects();
     updateStudioUi();
 
     const portfolioContactForm = document.getElementById("portfolioContactForm");
     const contactFormStatus = document.getElementById("contactFormStatus");
+    const contactFormSubjectLine = document.getElementById("contactFormSubjectLine");
+    const contactFormNextUrl = document.getElementById("contactFormNextUrl");
 
     function setContactStatus(message, type = "") {
       if (!contactFormStatus) return;
@@ -4117,8 +4242,19 @@
       contactFormStatus.className = `contact-form-status${type ? ` ${type}` : ""}`;
     }
 
+    function prepareDirectContactForm() {
+      if (!portfolioContactForm) return;
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set("contact", "success");
+      currentUrl.hash = "contact";
+      if (contactFormNextUrl) {
+        contactFormNextUrl.value = currentUrl.toString();
+      }
+    }
+
+    prepareDirectContactForm();
+
     portfolioContactForm?.addEventListener("submit", (event) => {
-      event.preventDefault();
       const formData = new FormData(portfolioContactForm);
       const name = String(formData.get("name") || "").trim();
       const email = String(formData.get("email") || "").trim();
@@ -4126,27 +4262,28 @@
       const message = String(formData.get("message") || "").trim();
 
       if (!name || !email || !subject || !message) {
+        event.preventDefault();
         setContactStatus("Please fill in all fields before sending the message.", "error");
         return;
       }
 
-      const preparedBody = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Subject: ${subject}`,
-        "",
-        "Message:",
-        message
-      ].join("\n");
+      if (contactFormSubjectLine) {
+        contactFormSubjectLine.value = `Portfolio message: ${subject}`;
+      }
 
-      const mailtoUrl = `mailto:${PROJECT_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(preparedBody)}`;
-      setContactStatus("Opening the email app with the prepared message...", "success");
-      window.location.href = mailtoUrl;
+      setContactStatus("Sending directly from the website...", "success");
     });
 
     portfolioContactForm?.addEventListener("reset", () => {
-      setTimeout(() => setContactStatus("Ready to send a direct message."), 0);
+      setTimeout(() => setContactStatus("Ready to receive direct website messages."), 0);
     });
+
+    if (new URLSearchParams(window.location.search).get("contact") === "success") {
+      setContactStatus("Message sent from the website. Please also check spam if it does not appear quickly.", "success");
+      const cleanUrl = new URL(window.location.href);
+      cleanUrl.searchParams.delete("contact");
+      window.history.replaceState({}, "", cleanUrl.toString());
+    }
 
 
     /* --- DSA modal + full 15 sets --- */

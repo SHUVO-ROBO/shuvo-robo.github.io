@@ -2300,6 +2300,519 @@
       .dsa-preview-stats { grid-template-columns: repeat(2, 1fr); }
     }
 
+  
+
+    /* ============================================================
+       PROJECT STUDIO + DIRECT CONTACT FORM
+    ============================================================ */
+    .project-studio-panel {
+      margin-bottom: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .project-studio-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .project-studio-head h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .project-studio-head p,
+    .project-studio-note,
+    .project-helper-note,
+    .contact-intro-card p,
+    .contact-form-note,
+    .contact-form-status {
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .project-studio-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .project-studio-note,
+    .project-helper-note {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.92rem;
+    }
+
+    .project-grid {
+      margin-top: 14px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .project-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .project-status-badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: #eaf7ff;
+      white-space: nowrap;
+    }
+
+    .status-live {
+      background: rgba(105,255,201,0.10);
+      border-color: rgba(105,255,201,0.20);
+      color: var(--green);
+    }
+
+    .status-in-progress,
+    .status-building {
+      background: rgba(89,231,255,0.10);
+      border-color: rgba(89,231,255,0.20);
+      color: var(--cyan);
+    }
+
+    .status-research {
+      background: rgba(162,118,255,0.12);
+      border-color: rgba(162,118,255,0.20);
+      color: #dacaff;
+    }
+
+    .status-archived {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.08);
+      color: #d7e6ff;
+    }
+
+    .project-card p {
+      margin-bottom: 16px;
+    }
+
+    .project-admin-row {
+      display: none;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    body.studio-mode-on .project-admin-row {
+      display: flex;
+    }
+
+    .admin-chip-btn {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: #eef6ff;
+      padding: 9px 12px;
+      border-radius: 12px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .admin-chip-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(89,231,255,0.10);
+      border-color: rgba(89,231,255,0.18);
+    }
+
+    .project-empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 34px 22px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(12, 20, 42, 0.9), rgba(7, 12, 28, 0.82));
+      border: 1px dashed rgba(89,231,255,0.20);
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .project-editor-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 2200;
+    }
+
+    .project-editor-modal.open {
+      display: block;
+    }
+
+    .project-editor-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 6, 14, 0.76);
+      backdrop-filter: blur(10px);
+    }
+
+    .project-editor-panel {
+      position: relative;
+      width: min(94vw, 760px);
+      max-height: 92vh;
+      margin: 4vh auto;
+      padding: 28px;
+      overflow-y: auto;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(12, 20, 42, 0.98), rgba(6, 11, 24, 0.98));
+      border: 1px solid rgba(89,231,255,0.16);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.45), 0 0 40px rgba(89,231,255,0.10);
+    }
+
+    .project-editor-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .project-editor-close:hover {
+      background: rgba(89,231,255,0.12);
+      border-color: rgba(89,231,255,0.20);
+    }
+
+    .project-editor-panel h3 {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .project-editor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .project-field,
+    .contact-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .project-field.full,
+    .contact-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .project-field label,
+    .contact-field label {
+      font-size: 0.88rem;
+      color: #dff2ff;
+      font-weight: 700;
+    }
+
+    .project-input,
+    .project-textarea,
+    .project-select,
+    .contact-input,
+    .contact-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.035);
+      color: #eef6ff;
+      font: inherit;
+      outline: none;
+      transition: 0.22s ease;
+    }
+
+    .project-textarea,
+    .contact-textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .project-input:focus,
+    .project-textarea:focus,
+    .project-select:focus,
+    .contact-input:focus,
+    .contact-textarea:focus {
+      border-color: rgba(89,231,255,0.24);
+      box-shadow: 0 0 0 3px rgba(89,231,255,0.08);
+    }
+
+    .project-form-actions,
+    .contact-form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .contact-flex-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .contact-intro-card,
+    .contact-form-card {
+      padding: 30px;
+    }
+
+    .contact-intro-card h3,
+    .contact-form-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-points {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .contact-point {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #d6e8ff;
+      line-height: 1.75;
+    }
+
+    .contact-point strong {
+      color: #fff;
+    }
+
+    .contact-email-bar {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 115, 213, 0.18), rgba(89, 231, 255, 0.20));
+      border: 1px solid rgba(255,255,255,0.10);
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-email-bar span {
+      font-size: 0.8rem;
+      color: #f4fbff;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .contact-email-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    .contact-email-bar a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .contact-form-status {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.92rem;
+    }
+
+    .contact-form-status.success {
+      border-color: rgba(105,255,201,0.20);
+      background: rgba(105,255,201,0.08);
+      color: #eafff6;
+    }
+
+    .contact-form-status.error {
+      border-color: rgba(255,112,112,0.20);
+      background: rgba(255,112,112,0.08);
+      color: #ffe8e8;
+    }
+
+    @media (max-width: 980px) {
+      .contact-flex-grid,
+      .project-editor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .project-studio-head,
+      .project-studio-actions,
+      .contact-form-actions {
+        justify-content: flex-start;
+      }
+
+      .contact-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-editor-panel,
+      .contact-intro-card,
+      .contact-form-card {
+        padding: 22px;
+      }
+    }
+
+
+    /* ============================================================
+       PROJECT TOOLBAR (SEARCH + FILTER) + FLOATING CONTACT BUTTON
+    ============================================================ */
+    .project-toolbar {
+      display: grid;
+      gap: 14px;
+      margin: 12px 0 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .project-toolbar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-count {
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .project-search {
+      width: 100%;
+      max-width: 420px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.035);
+      color: #eef6ff;
+      outline: none;
+      font: inherit;
+      transition: 0.22s ease;
+    }
+
+    .project-search::placeholder { color: #9fb4da; }
+
+    .project-search:focus {
+      border-color: rgba(89, 231, 255, 0.24);
+      box-shadow: 0 0 0 3px rgba(89, 231, 255, 0.08);
+    }
+
+    .project-filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-pill {
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1px solid rgba(89,231,255,0.16);
+      background: rgba(255,255,255,0.03);
+      color: #cfe4ff;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .filter-pill:hover {
+      transform: translateY(-1px);
+      background: rgba(89,231,255,0.08);
+      border-color: rgba(89,231,255,0.22);
+      color: #eefcff;
+    }
+
+    .filter-pill.active {
+      background: rgba(89,231,255,0.12);
+      border-color: rgba(89,231,255,0.26);
+      color: #eefcff;
+      box-shadow: inset 0 0 0 1px rgba(89,231,255,0.18);
+    }
+
+    .fab-contact {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(135deg, rgba(255,115,213,0.55), rgba(89,231,255,0.55));
+      color: #06131d;
+      font-size: 1.25rem;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 18px 42px rgba(0,0,0,0.34), 0 0 24px rgba(89,231,255,0.14);
+      transition: 0.22s ease;
+      z-index: 2400;
+    }
+
+    .fab-contact:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 22px 52px rgba(0,0,0,0.38), 0 0 28px rgba(89,231,255,0.18);
+    }
+
+    .fab-contact:focus-visible {
+      outline: 3px solid rgba(89,231,255,0.35);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 760px) {
+      .project-toolbar { padding: 16px; }
+      .project-search { max-width: 100%; }
+      .fab-contact { right: 14px; bottom: 14px; width: 54px; height: 54px; }
+    }
+
   </style>
 </head>
 <body>
@@ -2342,7 +2855,7 @@
           <div class="hero-content">
             <div class="badge" role="status">
               <span class="dot" aria-hidden="true"></span>
-              Teaching • Research • LLM • AI/ML • Robotics
+              Teaching • Research • AI/ML • LLM • Semiconductor • VLSI
             </div>
 
             <div class="hero-name">Md Borhan Uddin Shuvo</div>
@@ -2420,8 +2933,14 @@
           </p>
           <p>
             Professionally, I want to grow in three parallel directions:
-            <strong>teaching</strong>, <strong>research</strong>, and <strong>AI/ML engineering</strong>.
+            <strong>teaching</strong>, <strong>research</strong>, and <strong>AI/ML engineering</strong>, while also moving toward
+            <strong>advanced semiconductor technology, VLSI, and intelligent computing systems</strong>.
             I want to learn deeply, build seriously, and contribute meaningfully.
+          </p>
+          <p>
+            I also served as an <strong>Undergraduate Teaching Assistant at UIU</strong> for the
+            <strong>Structured Programming Language Lab</strong> and <strong>Introduction to Computer Science Lab</strong>
+            during the <strong>Summer 2025</strong> and <strong>Fall 2025</strong> trimesters.
           </p>
           </div>
         </div>
@@ -2450,8 +2969,9 @@
         <div class="card reveal about-fact-card"><h3>GitHub</h3><p>SHUVO-ROBO · <span>Shuvo0568</span></p></div>
         <div class="card reveal about-fact-card"><h3>University</h3><p>United International University</p></div>
         <div class="card reveal about-fact-card"><h3>Department</h3><p>Computer Science & Engineering</p></div>
-        <div class="card reveal about-fact-card"><h3>Career Goal</h3><p>Teaching, Research, LLM, AI/ML Engineering</p></div>
-        <div class="card reveal about-fact-card"><h3>Main Interests</h3><p>NVIDIA-style chip research, Semiconductor, LLM, Robotics, Agentic AI</p></div>
+        <div class="card reveal about-fact-card"><h3>Career Goal</h3><p>Teaching, Research, AI/ML Engineering, Advanced Semiconductor & VLSI Systems</p></div>
+        <div class="card reveal about-fact-card"><h3>Main Interests</h3><p>Advanced semiconductor systems, VLSI, chip design, AI infrastructure, LLMs, robotics, and agentic AI</p></div>
+        <div class="card reveal about-fact-card"><h3>Teaching Experience</h3><p>Undergraduate Teaching Assistant at UIU for Structured Programming Language Lab and Introduction to Computer Science Lab in Summer 2025 and Fall 2025.</p></div>
       </div>
     </div>
   </section>
@@ -2610,42 +3130,64 @@
     </div>
   </section>
 
+
   <!-- ============================================================
        PROJECTS
   ============================================================ -->
   <section id="projects" aria-labelledby="projects-title">
     <div class="container">
-      <h2 class="section-title reveal" id="projects-title">Portfolio Highlights</h2>
+      <h2 class="section-title reveal" id="projects-title">Project Studio</h2>
       <p class="section-subtitle reveal">
-        These highlights reflect my evolving interests, project direction, and long-term technical journey.
+        A flexible project showcase where I can add, edit, and refresh portfolio projects whenever I need.
       </p>
 
-      <div class="grid cards-3">
-        <div class="card reveal">
-          <div class="card-icon" aria-hidden="true">01</div>
-          <h3>AI & LLM Growth Track</h3>
-          <p>A growing body of learning and implementation work centered around AI, ML, LLM concepts, experimentation, engineering mindset, and long-term research preparation.</p>
-          <div class="project-links"><a href="#github">View Technical Overview</a></div>
+      <div class="glass panel reveal project-studio-panel">
+        <div class="project-studio-head">
+          <div>
+            <span class="mini-kicker">Flexible portfolio control</span>
+            <h3>Update projects directly from the portfolio</h3>
+            <p>
+              This section is now ready for live project management. I can create new cards, edit details,
+              change links, update status, and remove old projects from one clean project studio.
+            </p>
+          </div>
+
+          <div class="project-studio-actions">
+            <button class="btn btn-primary" type="button" id="addProjectBtn">Add New Project</button>
+            <button class="btn btn-outline" type="button" id="toggleStudioModeBtn">Studio Mode: Off</button>
+            <button class="btn btn-outline" type="button" id="exportProjectsBtn">Export Project Data</button>
+            <button class="btn btn-outline" type="button" id="importProjectsBtn">Import JSON</button>
+            <button class="btn btn-outline" type="button" id="resetProjectsBtn">Reset</button>
+          </div>
         </div>
 
-        <div class="card reveal">
-          <div class="card-icon" aria-hidden="true">02</div>
-          <h3>Robotics + Intelligent Systems Vision</h3>
-          <p>A future-facing direction that combines robotics, agentic intelligence, control thinking, real-world systems, and research-oriented exploration.</p>
-          <div class="project-links"><a href="#focus">Explore Focus Areas</a></div>
-        </div>
-
-        <div class="card reveal">
-          <div class="card-icon" aria-hidden="true">03</div>
-          <h3>Professional Academic Identity</h3>
-          <p>A professional profile built around my academic journey, research interests, and long-term goals in teaching, AI/ML engineering, LLM research, robotics, and advanced computing.</p>
-          <div class="project-links"><a href="#contact">Connect With Me</a></div>
+        <div class="project-studio-note" id="projectStudioNote">
+          Studio mode lets you edit project cards from inside the portfolio. Changes save instantly in this browser.
         </div>
       </div>
+
+
+      <div class="project-toolbar reveal" aria-label="Project search and filter">
+        <div class="project-toolbar-top">
+          <span class="project-count" id="projectCountText">Showing projects</span>
+          <input class="project-search" id="projectSearchInput" type="search" placeholder="Search projects by title, tags, or status" />
+        </div>
+        <div class="project-filter-pills" id="projectFilterPills" role="tablist" aria-label="Project status filter">
+          <button class="filter-pill active" type="button" data-project-filter="all">All</button>
+          <button class="filter-pill" type="button" data-project-filter="live">Live</button>
+          <button class="filter-pill" type="button" data-project-filter="building">Building</button>
+          <button class="filter-pill" type="button" data-project-filter="in-progress">In Progress</button>
+          <button class="filter-pill" type="button" data-project-filter="research">Research</button>
+          <button class="filter-pill" type="button" data-project-filter="archived">Archived</button>
+        </div>
+      </div>
+
+      <div class="grid cards-3 project-grid" id="projectGrid"></div>
+
     </div>
   </section>
 
-  
+
   <!-- ============================================================
        DSA / LEETCODE — COMPACT SECTION
   ============================================================ -->
@@ -2837,14 +3379,15 @@
     </div>
   </section>
 
+
   <!-- ============================================================
        CONTACT
   ============================================================ -->
   <section id="contact" aria-labelledby="contact-title">
     <div class="container">
-      <h2 class="section-title reveal" id="contact-title">Contact & Profiles</h2>
+      <h2 class="section-title reveal" id="contact-title">Contact</h2>
       <p class="section-subtitle reveal">
-        A clean and professional contact section connecting my academic, social, and technical identity.
+        For collaboration, research, teaching, or project discussions, feel free to reach out.
       </p>
 
       <div class="grid social-grid">
@@ -2863,7 +3406,7 @@
         <div class="card social-card reveal">
           <div class="card-icon" aria-hidden="true">GH</div>
           <h3>GitHub</h3>
-          <p><a href="https://github.com/Shuvo0568" target="_blank" rel="noopener noreferrer">github.com/Shuvo0568</a></p>
+          <p><a href="https://github.com/SHUVO-ROBO" target="_blank" rel="noopener noreferrer">github.com/SHUVO-ROBO</a></p>
         </div>
 
         <div class="card social-card reveal">
@@ -2883,45 +3426,71 @@
           <h3>Curriculum Vitae</h3>
           <p><a href="./cv.pdf" download="Md_Borhan_Uddin_Shuvo_CV.pdf">Download My CV</a></p>
         </div>
-
-        <div class="card social-card reveal">
-          <div class="card-icon" aria-hidden="true">CG</div>
-          <h3>Career Direction</h3>
-          <p>Teaching, Research, LLM, AI/ML Engineering, Robotics, Semiconductor-Oriented Exploration</p>
-        </div>
       </div>
-    </div>
-  </section>
 
+      <div class="grid contact-flex-grid">
+        <div class="glass panel reveal contact-intro-card">
+          <span class="mini-kicker">Let's connect</span>
+          <h3>Open my inbox or send a direct message</h3>
+          <p>
+            Use the quick links below, or send a message from the form on the right.
+          </p>
 
-  <section id="visitors" class="mini-visitor-section" aria-labelledby="visitors-title">
-    <div class="container">
-      <div class="glass mini-visitor-shell reveal">
-        <div class="mini-visitor-head">
+          <div class="project-links">
+            <a href="mailto:mdborhanuddinshuvo7@gmail.com">Personal Email</a>
+            <a href="mailto:mshuvo2420568@bscse.uiu.ac.bd">University Email</a>
+            <a href="https://bd.linkedin.com/in/md-borhan-uddin-shuvo-5663b7300" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/SHUVO-ROBO" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+
+          <div class="contact-email-bar">
+            <span>Primary inbox</span>
+            <a href="mailto:mdborhanuddinshuvo7@gmail.com">mdborhanuddinshuvo7@gmail.com</a>
+          </div>
+        </div>
+
+        <form class="glass contact-form-card reveal" id="portfolioContactForm">
           <div>
-            <h2 id="visitors-title">Portfolio Visits</h2>
-            <p>Small footer counter for the portfolio.</p>
+            <span class="mini-kicker">Direct message</span>
+            <h3>Send a message</h3>
+            <p class="contact-form-note">Fill in the details and open a ready-to-send email draft.</p>
           </div>
-          <span class="visitor-status mini-status" id="visitorStatus">Connecting…</span>
-        </div>
-        <div class="mini-visitor-grid">
-          <div class="mini-visitor-card">
-            <span>Total Views</span>
-            <strong id="visitTotal">—</strong>
+
+          <div class="contact-form-grid">
+            <div class="contact-field">
+              <label for="contactName">Your Name</label>
+              <input class="contact-input" id="contactName" name="name" type="text" placeholder="Your Name" required />
+            </div>
+
+            <div class="contact-field">
+              <label for="contactEmail">Your Email</label>
+              <input class="contact-input" id="contactEmail" name="email" type="email" placeholder="your@email.com" required />
+            </div>
+
+            <div class="contact-field full">
+              <label for="contactSubject">Subject</label>
+              <input class="contact-input" id="contactSubject" name="subject" type="text" placeholder="Teaching inquiry, project idea, collaboration, research interest" required />
+            </div>
+
+            <div class="contact-field full">
+              <label for="contactMessage">Your Message</label>
+              <textarea class="contact-textarea" id="contactMessage" name="message" placeholder="Write your message here..." required></textarea>
+            </div>
           </div>
-          <div class="mini-visitor-card">
-            <span>This Browser</span>
-            <strong id="visitLocal">—</strong>
+
+          <div class="contact-form-status" id="contactFormStatus">Ready.</div>
+
+          <div class="contact-form-actions">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <button class="btn btn-outline" type="reset">Clear Form</button>
           </div>
-          <div class="mini-visitor-card">
-            <span>Last Visit</span>
-            <strong id="visitLast">—</strong>
-          </div>
-        </div>
-        <p class="mini-visitor-note" id="visitHint">Live on deployed pages. Local preview shows browser-side history only.</p>
+        </form>
       </div>
     </div>
   </section>
+
+
+  <button class="fab-contact" id="fabContactBtn" type="button" aria-label="Open contact section">✉</button>
 
 
   <!-- ============================================================
@@ -2991,6 +3560,594 @@
     }, { threshold: 0.12 });
 
     revealElements.forEach((el) => observer.observe(el));
+
+
+    /* --- Project studio + direct contact --- */
+    const PROJECT_STORAGE_KEY = "shuvo-robo-portfolio-projects-v1";
+    const PROJECT_CONTACT_EMAIL = "mdborhanuddinshuvo7@gmail.com";
+    const DEFAULT_PORTFOLIO_PROJECTS = [
+      {
+        id: "ai-llm-growth-track",
+        icon: "01",
+        title: "AI & LLM Growth Track",
+        status: "Building",
+        description: "A growing body of learning and implementation work centered around AI, ML, LLM concepts, experimentation, engineering mindset, and long-term research preparation.",
+        tags: ["AI", "ML", "LLM", "Research"],
+        links: [
+          { label: "View Technical Overview", href: "#github" }
+        ]
+      },
+      {
+        id: "robotics-intelligent-systems-vision",
+        icon: "02",
+        title: "Robotics + Intelligent Systems Vision",
+        status: "Research",
+        description: "A future-facing direction that combines robotics, agentic intelligence, control thinking, real-world systems, and research-oriented exploration.",
+        tags: ["Robotics", "Agentic AI", "Systems", "Vision"],
+        links: [
+          { label: "Explore Focus Areas", href: "#focus" }
+        ]
+      },
+      {
+        id: "professional-academic-identity",
+        icon: "03",
+        title: "Professional Academic Identity",
+        status: "Live",
+        description: "A professional profile built around my academic journey, teaching experience, research interests, and long-term goals in AI/ML engineering, semiconductor technology, VLSI-focused systems, and advanced computing.",
+        tags: ["Portfolio", "Academic", "Identity", "Teaching"],
+        links: [
+          { label: "View Contact", href: "#contact" }
+        ]
+      }
+    ];
+
+    let portfolioProjects = loadPortfolioProjects();
+    let studioMode = false;
+
+    const projectGrid = document.getElementById("projectGrid");
+    const projectStudioNote = document.getElementById("projectStudioNote");
+    const toggleStudioModeBtn = document.getElementById("toggleStudioModeBtn");
+    const addProjectBtn = document.getElementById("addProjectBtn");
+    const exportProjectsBtn = document.getElementById("exportProjectsBtn");
+    const resetProjectsBtn = document.getElementById("resetProjectsBtn");
+    const importProjectsBtn = document.getElementById("importProjectsBtn");
+    const projectSearchInput = document.getElementById("projectSearchInput");
+    const projectFilterPills = document.getElementById("projectFilterPills");
+    const projectCountText = document.getElementById("projectCountText");
+
+    let projectSearchTerm = "";
+    let projectStatusFilter = "all";
+
+
+    function cloneProjectData(data) {
+      return JSON.parse(JSON.stringify(data));
+    }
+
+    function loadPortfolioProjects() {
+      try {
+        const cached = localStorage.getItem(PROJECT_STORAGE_KEY);
+        if (!cached) return cloneProjectData(DEFAULT_PORTFOLIO_PROJECTS);
+        const parsed = JSON.parse(cached);
+        return Array.isArray(parsed) && parsed.length ? parsed : cloneProjectData(DEFAULT_PORTFOLIO_PROJECTS);
+      } catch (error) {
+        return cloneProjectData(DEFAULT_PORTFOLIO_PROJECTS);
+      }
+    }
+
+    function savePortfolioProjects() {
+      localStorage.setItem(PROJECT_STORAGE_KEY, JSON.stringify(portfolioProjects));
+    }
+
+    function normalizeProjectStatus(status = "Building") {
+      const value = String(status || "Building").trim();
+      return value || "Building";
+    }
+
+    function statusClassName(status = "Building") {
+      return `status-${String(status).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+    }
+
+    function createProjectId(title = "project") {
+      return `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "project"}-${Date.now()}`;
+    }
+
+    function renderPortfolioProjects() {
+      if (!projectGrid) return;
+
+      const normalizedSearch = projectSearchTerm.trim().toLowerCase();
+      const visibleProjects = portfolioProjects.filter((project) => {
+        const status = String(project.status || "Building").toLowerCase();
+        const statusKey = status.replace(/[^a-z0-9]+/g, "-");
+        const matchesStatus = projectStatusFilter === "all" ? true : statusKey === projectStatusFilter;
+        if (!matchesStatus) return false;
+
+        if (!normalizedSearch) return true;
+        const haystack = [
+          project.title || "",
+          project.description || "",
+          project.status || "",
+          ...(Array.isArray(project.tags) ? project.tags : [])
+        ].join(" ").toLowerCase();
+        return haystack.includes(normalizedSearch);
+      });
+
+      if (projectCountText) {
+        projectCountText.textContent = `Showing ${visibleProjects.length} of ${portfolioProjects.length} projects`;
+      }
+
+      if (!visibleProjects.length) {
+        projectGrid.innerHTML = `
+          <div class="project-empty-state">
+            No projects match your search/filter. Try clearing the search or selecting <strong>All</strong>.
+          </div>
+        `;
+        return;
+      }
+
+      projectGrid.innerHTML = visibleProjects.map((project, index) => {
+        const tags = Array.isArray(project.tags) ? project.tags : [];
+        const links = Array.isArray(project.links) ? project.links.filter(link => link && link.label && link.href) : [];
+        return `
+          <article class="card project-card">
+            <div class="project-card-top">
+              <div class="card-icon" aria-hidden="true">${escapeHtml(project.icon || String(index + 1).padStart(2, "0"))}</div>
+              <span class="project-status-badge ${statusClassName(project.status)}">${escapeHtml(normalizeProjectStatus(project.status))}</span>
+            </div>
+            <h3>${escapeHtml(project.title || "Untitled Project")}</h3>
+            <p>${escapeHtml(project.description || "No description added yet.")}</p>
+            <div class="chips">
+              ${tags.length ? tags.map(tag => `<span class="chip">${escapeHtml(tag)}</span>`).join("") : `<span class="chip">Project</span>`}
+            </div>
+            <div class="project-links">
+              ${links.length ? links.map(link => `<a href="${escapeAttribute(link.href)}" ${isExternalLink(link.href) ? 'target="_blank" rel="noopener noreferrer"' : ''}>${escapeHtml(link.label)}</a>`).join("") : `<a href="#contact">Ask About This Project</a>`}
+            </div>
+            <div class="project-admin-row">
+              <button class="admin-chip-btn" type="button" data-project-action="edit" data-project-id="${escapeAttribute(project.id)}">Edit</button>
+              <button class="admin-chip-btn" type="button" data-project-action="delete" data-project-id="${escapeAttribute(project.id)}">Delete</button>
+              <button class="admin-chip-btn" type="button" data-project-action="up" data-project-id="${escapeAttribute(project.id)}">Move Up</button>
+              <button class="admin-chip-btn" type="button" data-project-action="down" data-project-id="${escapeAttribute(project.id)}">Move Down</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function isExternalLink(value = "") {
+      return /^https?:\/\//i.test(value);
+    }
+
+    function escapeHtml(value = "") {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function escapeAttribute(value = "") {
+      return escapeHtml(value).replace(/`/g, "&#96;");
+    }
+
+    function updateStudioUi() {
+      document.body.classList.toggle("studio-mode-on", studioMode);
+      if (toggleStudioModeBtn) {
+        toggleStudioModeBtn.textContent = `Studio Mode: ${studioMode ? "On" : "Off"}`;
+      }
+      if (projectStudioNote) {
+        projectStudioNote.textContent = studioMode
+          ? "Studio mode is active. You can now edit, delete, move, and add project cards."
+          : "Studio mode is off. Visitors only see the clean public project view.";
+      }
+    }
+
+    const projectEditorModal = document.createElement("div");
+    projectEditorModal.className = "project-editor-modal";
+    projectEditorModal.id = "projectEditorModal";
+    projectEditorModal.setAttribute("aria-hidden", "true");
+    projectEditorModal.innerHTML = `
+      <div class="project-editor-backdrop" id="projectEditorBackdrop"></div>
+      <div class="project-editor-panel" role="dialog" aria-modal="true" aria-labelledby="projectEditorTitle">
+        <button class="project-editor-close" type="button" id="projectEditorClose" aria-label="Close project editor">×</button>
+        <h3 id="projectEditorTitle">Add New Project</h3>
+        <p class="project-studio-note">Create a new project or edit an existing one. The card updates instantly inside the portfolio.</p>
+        <form id="projectEditorForm">
+          <input type="hidden" id="projectEditId" />
+          <div class="project-editor-grid">
+            <div class="project-field">
+              <label for="projectTitleInput">Project Title</label>
+              <input class="project-input" id="projectTitleInput" type="text" placeholder="My project title" required />
+            </div>
+            <div class="project-field">
+              <label for="projectIconInput">Icon / Short Code</label>
+              <input class="project-input" id="projectIconInput" type="text" maxlength="6" placeholder="AI" required />
+            </div>
+            <div class="project-field">
+              <label for="projectStatusInput">Status</label>
+              <select class="project-select" id="projectStatusInput">
+                <option>Live</option>
+                <option selected>Building</option>
+                <option>In Progress</option>
+                <option>Research</option>
+                <option>Archived</option>
+              </select>
+            </div>
+            <div class="project-field">
+              <label for="projectTagsInput">Tags</label>
+              <input class="project-input" id="projectTagsInput" type="text" placeholder="AI, ML, Portfolio" />
+            </div>
+            <div class="project-field full">
+              <label for="projectDescriptionInput">Description</label>
+              <textarea class="project-textarea" id="projectDescriptionInput" placeholder="Write a short, strong description for this project." required></textarea>
+            </div>
+            <div class="project-field">
+              <label for="projectPrimaryLabelInput">Primary Link Label</label>
+              <input class="project-input" id="projectPrimaryLabelInput" type="text" placeholder="View Project" />
+            </div>
+            <div class="project-field">
+              <label for="projectPrimaryUrlInput">Primary Link URL</label>
+              <input class="project-input" id="projectPrimaryUrlInput" type="text" placeholder="https://... or #section" />
+            </div>
+            <div class="project-field">
+              <label for="projectSecondaryLabelInput">Secondary Link Label</label>
+              <input class="project-input" id="projectSecondaryLabelInput" type="text" placeholder="Source Code" />
+            </div>
+            <div class="project-field">
+              <label for="projectSecondaryUrlInput">Secondary Link URL</label>
+              <input class="project-input" id="projectSecondaryUrlInput" type="text" placeholder="https://... or #section" />
+            </div>
+            <div class="project-form-actions">
+              <button class="btn btn-primary" type="submit">Save Project</button>
+              <button class="btn btn-outline" type="button" id="projectEditorCancel">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(projectEditorModal);
+
+    const projectEditorForm = document.getElementById("projectEditorForm");
+    const projectEditIdInput = document.getElementById("projectEditId");
+    const projectTitleInput = document.getElementById("projectTitleInput");
+    const projectIconInput = document.getElementById("projectIconInput");
+    const projectStatusInput = document.getElementById("projectStatusInput");
+    const projectTagsInput = document.getElementById("projectTagsInput");
+    const projectDescriptionInput = document.getElementById("projectDescriptionInput");
+    const projectPrimaryLabelInput = document.getElementById("projectPrimaryLabelInput");
+    const projectPrimaryUrlInput = document.getElementById("projectPrimaryUrlInput");
+    const projectSecondaryLabelInput = document.getElementById("projectSecondaryLabelInput");
+    const projectSecondaryUrlInput = document.getElementById("projectSecondaryUrlInput");
+    const projectEditorTitle = document.getElementById("projectEditorTitle");
+
+    function openProjectEditor(projectId = null) {
+      const project = portfolioProjects.find(item => item.id === projectId);
+      projectEditIdInput.value = project?.id || "";
+      projectTitleInput.value = project?.title || "";
+      projectIconInput.value = project?.icon || "";
+      projectStatusInput.value = normalizeProjectStatus(project?.status || "Building");
+      projectTagsInput.value = Array.isArray(project?.tags) ? project.tags.join(", ") : "";
+      projectDescriptionInput.value = project?.description || "";
+      projectPrimaryLabelInput.value = project?.links?.[0]?.label || "";
+      projectPrimaryUrlInput.value = project?.links?.[0]?.href || "";
+      projectSecondaryLabelInput.value = project?.links?.[1]?.label || "";
+      projectSecondaryUrlInput.value = project?.links?.[1]?.href || "";
+      projectEditorTitle.textContent = project ? "Edit Project" : "Add New Project";
+      projectEditorModal.classList.add("open");
+      projectEditorModal.setAttribute("aria-hidden", "false");
+      setTimeout(() => projectTitleInput.focus(), 60);
+    }
+
+    function closeProjectEditor() {
+      projectEditorModal.classList.remove("open");
+      projectEditorModal.setAttribute("aria-hidden", "true");
+      projectEditorForm.reset();
+      projectEditIdInput.value = "";
+    }
+
+    function collectProjectLinks() {
+      const links = [];
+      const primaryLabel = projectPrimaryLabelInput.value.trim();
+      const primaryUrl = projectPrimaryUrlInput.value.trim();
+      const secondaryLabel = projectSecondaryLabelInput.value.trim();
+      const secondaryUrl = projectSecondaryUrlInput.value.trim();
+      if (primaryLabel && primaryUrl) links.push({ label: primaryLabel, href: primaryUrl });
+      if (secondaryLabel && secondaryUrl) links.push({ label: secondaryLabel, href: secondaryUrl });
+      return links;
+    }
+
+    projectEditorForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const existingId = projectEditIdInput.value.trim();
+      const preparedProject = {
+        id: existingId || createProjectId(projectTitleInput.value.trim()),
+        icon: projectIconInput.value.trim() || "PRJ",
+        title: projectTitleInput.value.trim(),
+        status: normalizeProjectStatus(projectStatusInput.value),
+        description: projectDescriptionInput.value.trim(),
+        tags: projectTagsInput.value.split(",").map(item => item.trim()).filter(Boolean),
+        links: collectProjectLinks()
+      };
+
+      if (!preparedProject.title || !preparedProject.description) return;
+
+      if (existingId) {
+        portfolioProjects = portfolioProjects.map(item => item.id === existingId ? preparedProject : item);
+      } else {
+        portfolioProjects = [preparedProject, ...portfolioProjects];
+      }
+
+      savePortfolioProjects();
+      renderPortfolioProjects();
+      closeProjectEditor();
+      studioMode = true;
+      updateStudioUi();
+    });
+
+    document.getElementById("projectEditorClose")?.addEventListener("click", closeProjectEditor);
+    document.getElementById("projectEditorCancel")?.addEventListener("click", closeProjectEditor);
+    document.getElementById("projectEditorBackdrop")?.addEventListener("click", closeProjectEditor);
+
+    projectGrid?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-project-action]");
+      if (!button) return;
+      const action = button.getAttribute("data-project-action");
+      const projectId = button.getAttribute("data-project-id");
+      const index = portfolioProjects.findIndex(item => item.id === projectId);
+      if (index === -1) return;
+
+      if (action === "edit") {
+        openProjectEditor(projectId);
+        return;
+      }
+
+      if (action === "delete") {
+        const ok = window.confirm("Delete this project card from the portfolio?");
+        if (!ok) return;
+        portfolioProjects.splice(index, 1);
+      }
+
+      if (action === "up" && index > 0) {
+        [portfolioProjects[index - 1], portfolioProjects[index]] = [portfolioProjects[index], portfolioProjects[index - 1]];
+      }
+
+      if (action === "down" && index < portfolioProjects.length - 1) {
+        [portfolioProjects[index + 1], portfolioProjects[index]] = [portfolioProjects[index], portfolioProjects[index + 1]];
+      }
+
+      savePortfolioProjects();
+      renderPortfolioProjects();
+    });
+
+    addProjectBtn?.addEventListener("click", () => {
+      studioMode = true;
+      updateStudioUi();
+      openProjectEditor();
+    });
+
+    toggleStudioModeBtn?.addEventListener("click", () => {
+      studioMode = !studioMode;
+      updateStudioUi();
+    });
+
+    exportProjectsBtn?.addEventListener("click", async () => {
+      const payload = JSON.stringify(portfolioProjects, null, 2);
+      const blob = new Blob([payload], { type: "application/json" });
+      const downloadUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = "portfolio-projects.json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(downloadUrl);
+
+      try {
+        await navigator.clipboard.writeText(payload);
+        if (projectStudioNote) projectStudioNote.textContent = "Project data exported and copied to clipboard.";
+      } catch (error) {
+        if (projectStudioNote) projectStudioNote.textContent = "Project data exported as a JSON file.";
+      }
+
+    /* --- Project search + filter --- */
+    projectSearchInput?.addEventListener("input", (event) => {
+      projectSearchTerm = String(event.target.value || "");
+      renderPortfolioProjects();
+    });
+
+    projectFilterPills?.addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-project-filter]");
+      if (!btn) return;
+      projectStatusFilter = btn.getAttribute("data-project-filter") || "all";
+      projectFilterPills.querySelectorAll(".filter-pill").forEach((pill) => {
+        pill.classList.toggle("active", pill === btn);
+      });
+      renderPortfolioProjects();
+    });
+
+    /* --- Import JSON (to move projects across devices) --- */
+    const importModal = document.createElement("div");
+    importModal.className = "project-editor-modal";
+    importModal.id = "projectImportModal";
+    importModal.setAttribute("aria-hidden", "true");
+    importModal.innerHTML = `
+      <div class="project-editor-backdrop" id="projectImportBackdrop"></div>
+      <div class="project-editor-panel" role="dialog" aria-modal="true" aria-labelledby="projectImportTitle">
+        <button class="project-editor-close" type="button" id="projectImportClose" aria-label="Close import">×</button>
+        <h3 id="projectImportTitle">Import Project JSON</h3>
+        <p class="project-studio-note">Paste JSON (exported from this portfolio) or select a JSON file. This will replace the current project list in this browser.</p>
+
+        <div class="project-editor-grid" style="grid-template-columns: 1fr;">
+          <div class="project-field full">
+            <label for="projectImportTextarea">Paste JSON</label>
+            <textarea class="project-textarea" id="projectImportTextarea" placeholder='[ { "id": "...", "title": "..." } ]'></textarea>
+          </div>
+
+          <div class="project-field full">
+            <label for="projectImportFile">Or choose a file</label>
+            <input class="project-input" id="projectImportFile" type="file" accept="application/json" />
+          </div>
+
+          <div class="project-form-actions">
+            <button class="btn btn-primary" type="button" id="projectImportApply">Import</button>
+            <button class="btn btn-outline" type="button" id="projectImportCancel">Cancel</button>
+          </div>
+
+          <div class="project-studio-note" id="projectImportStatus">Ready to import.</div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(importModal);
+
+    const projectImportTextarea = document.getElementById("projectImportTextarea");
+    const projectImportFile = document.getElementById("projectImportFile");
+    const projectImportStatus = document.getElementById("projectImportStatus");
+
+    function setImportStatus(message) {
+      if (projectImportStatus) projectImportStatus.textContent = message;
+    }
+
+    function openImportModal() {
+      importModal.classList.add("open");
+      importModal.setAttribute("aria-hidden", "false");
+      setImportStatus("Ready to import.");
+      setTimeout(() => projectImportTextarea?.focus(), 60);
+    }
+
+    function closeImportModal() {
+      importModal.classList.remove("open");
+      importModal.setAttribute("aria-hidden", "true");
+      if (projectImportTextarea) projectImportTextarea.value = "";
+      if (projectImportFile) projectImportFile.value = "";
+      setImportStatus("Ready to import.");
+    }
+
+    function sanitizeImportedProjects(items) {
+      if (!Array.isArray(items)) return null;
+      const cleaned = items.map((item) => {
+        const safe = item && typeof item === "object" ? item : {};
+        const title = String(safe.title || "Untitled Project").trim();
+        return {
+          id: String(safe.id || createProjectId(title)),
+          icon: String(safe.icon || "PRJ").trim().slice(0, 6),
+          title,
+          status: normalizeProjectStatus(safe.status || "Building"),
+          description: String(safe.description || "").trim() || "No description added yet.",
+          tags: Array.isArray(safe.tags) ? safe.tags.map((t) => String(t).trim()).filter(Boolean) : [],
+          links: Array.isArray(safe.links) ? safe.links.filter((l) => l && l.label && l.href) : []
+        };
+      });
+      return cleaned;
+    }
+
+    async function readFileAsText(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ""));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsText(file);
+      });
+    }
+
+    importProjectsBtn?.addEventListener("click", () => {
+      studioMode = true;
+      updateStudioUi();
+      openImportModal();
+    });
+
+    document.getElementById("projectImportClose")?.addEventListener("click", closeImportModal);
+    document.getElementById("projectImportCancel")?.addEventListener("click", closeImportModal);
+    document.getElementById("projectImportBackdrop")?.addEventListener("click", closeImportModal);
+
+    document.getElementById("projectImportApply")?.addEventListener("click", async () => {
+      try {
+        let raw = String(projectImportTextarea?.value || "").trim();
+        if (!raw && projectImportFile?.files?.[0]) {
+          raw = await readFileAsText(projectImportFile.files[0]);
+        }
+        if (!raw) {
+          setImportStatus("Paste JSON or choose a file first.");
+          return;
+        }
+        const parsed = JSON.parse(raw);
+        const cleaned = sanitizeImportedProjects(parsed);
+        if (!cleaned) {
+          setImportStatus("Invalid JSON format. Expected an array of projects.");
+          return;
+        }
+        portfolioProjects = cleaned;
+        savePortfolioProjects();
+        renderPortfolioProjects();
+        setImportStatus("Imported successfully. Closing...");
+        setTimeout(closeImportModal, 600);
+      } catch (err) {
+        setImportStatus("Import failed. Please check JSON format.");
+      }
+    });
+
+    /* --- Floating contact button --- */
+    const fabContactBtn = document.getElementById("fabContactBtn");
+    fabContactBtn?.addEventListener("click", () => {
+      const contactSection = document.getElementById("contact");
+      contactSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => {
+        document.getElementById("contactName")?.focus();
+      }, 650);
+    });
+
+    });
+
+    resetProjectsBtn?.addEventListener("click", () => {
+      const ok = window.confirm("Reset project cards back to the default portfolio version?");
+      if (!ok) return;
+      portfolioProjects = cloneProjectData(DEFAULT_PORTFOLIO_PROJECTS);
+      savePortfolioProjects();
+      renderPortfolioProjects();
+      if (projectStudioNote) projectStudioNote.textContent = "Project cards reset to the default portfolio version.";
+    });
+
+    renderPortfolioProjects();
+    updateStudioUi();
+
+    const portfolioContactForm = document.getElementById("portfolioContactForm");
+    const contactFormStatus = document.getElementById("contactFormStatus");
+
+    function setContactStatus(message, type = "") {
+      if (!contactFormStatus) return;
+      contactFormStatus.textContent = message;
+      contactFormStatus.className = `contact-form-status${type ? ` ${type}` : ""}`;
+    }
+
+    portfolioContactForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(portfolioContactForm);
+      const name = String(formData.get("name") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const subject = String(formData.get("subject") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+
+      if (!name || !email || !subject || !message) {
+        setContactStatus("Please fill in all fields before sending the message.", "error");
+        return;
+      }
+
+      const preparedBody = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Subject: ${subject}`,
+        "",
+        "Message:",
+        message
+      ].join("\n");
+
+      const mailtoUrl = `mailto:${PROJECT_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(preparedBody)}`;
+      setContactStatus("Opening the email app with the prepared message...", "success");
+      window.location.href = mailtoUrl;
+    });
+
+    portfolioContactForm?.addEventListener("reset", () => {
+      setTimeout(() => setContactStatus("Ready to send a direct message."), 0);
+    });
+
 
     /* --- DSA modal + full 15 sets --- */
     const LEETCODE_USER = "Shuvo0568";

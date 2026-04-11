@@ -2892,7 +2892,7 @@
   <header>
     <div class="container">
       <nav aria-label="Main navigation">
-        <a class="brand" href="#home">SHUVO<span>-ROBO</span></a>
+        <a class="brand" href="#home" title="Double-click to unlock Owner Studio">SHUVO<span>-ROBO</span></a>
         <ul class="nav-links" role="list">
           <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
@@ -3697,6 +3697,7 @@
     const projectFilterPills = document.getElementById("projectFilterPills");
     const projectCountText = document.getElementById("projectCountText");
     const ownerStudioIndicator = document.getElementById("ownerStudioIndicator");
+    const ownerBrandTrigger = document.querySelector(".brand");
 
     let projectSearchTerm = "";
     let projectStatusFilter = "all";
@@ -3863,6 +3864,15 @@
       return unlockOwnerStudio();
     }
 
+    function toggleOwnerStudioAccess() {
+      if (ownerStudioUnlocked) {
+        lockOwnerStudio();
+        window.alert("Owner Studio locked.");
+        return;
+      }
+      unlockOwnerStudio();
+    }
+
     function updateStudioUi() {
       document.body.classList.toggle("studio-mode-on", ownerStudioUnlocked && studioMode);
 
@@ -3875,7 +3885,7 @@
           ? (studioMode
               ? "Studio mode is active. You can now edit, delete, move, and add project cards."
               : "Studio mode is off. Visitors only see the clean public project view.")
-          : "Owner controls are hidden from visitors. Press Alt + Shift + S to unlock them on your device.";
+          : "Owner controls are hidden from visitors. Press Alt + Shift + S, or double-click the SHUVO-ROBO logo to unlock them on your device.";
       }
     }
 
@@ -4253,6 +4263,31 @@
 
     const ownerStudioStored = localStorage.getItem(OWNER_STUDIO_STORAGE_KEY) === "true";
     setOwnerStudioUnlocked(ownerStudioStored);
+
+    if (ownerBrandTrigger) {
+      let ownerBrandTapCount = 0;
+      let ownerBrandTapTimer;
+
+      ownerBrandTrigger.addEventListener("dblclick", (event) => {
+        event.preventDefault();
+        toggleOwnerStudioAccess();
+      });
+
+      ownerBrandTrigger.addEventListener("click", () => {
+        ownerBrandTapCount += 1;
+        window.clearTimeout(ownerBrandTapTimer);
+
+        if (ownerBrandTapCount >= 3) {
+          ownerBrandTapCount = 0;
+          toggleOwnerStudioAccess();
+          return;
+        }
+
+        ownerBrandTapTimer = window.setTimeout(() => {
+          ownerBrandTapCount = 0;
+        }, 900);
+      });
+    }
 
     document.addEventListener("keydown", (event) => {
       if (event.altKey && event.shiftKey && String(event.key).toLowerCase() === "s") {
